@@ -2,10 +2,13 @@
 
 require_relative 'dictionary'
 require_relative 'player'
+require 'colorize'
 class Game
   def initialize
-    puts 'Welcome to Hangman!'
-    puts 'Guess the secret word. You have 6 wrong guesses.'
+    puts '========'
+    puts 'Hangman!'.colorize(:blue)
+    puts '========'
+    puts "\nGuess the secret word. You have 6 wrong guesses.\n".colorize(:yellow)
     @secret_word = Dictionary.new.select_secret_word
     @player = Player.new
     @incorrect_guesses = 0
@@ -18,7 +21,7 @@ class Game
       guess = @player.make_guess
       puts update_display(guess)
       @incorrect_guesses += 1 unless @secret_word.include?(guess)
-      puts "\nYou can make only #{6 - @incorrect_guesses} wrong guesses"
+      puts "\nYou can make only #{6 - @incorrect_guesses} wrong guesses".colorize(:blue)
       break if game_over
     end
   end
@@ -26,7 +29,7 @@ class Game
   private
 
   def display_secret_word_dashes
-    @secret_word.gsub(/[^A-Z\s]/, '_ ')
+    @secret_word.gsub(/[^a-z\s]/, '_ ').colorize(:green)
   end
 
   def update_display(guess)
@@ -36,10 +39,10 @@ class Game
 
   def game_over
     if @incorrect_guesses == 6
-      puts "Game over! The word was: #{@secret_word}"
+      puts "Game over! The word was: #{@secret_word}".colorize(:red)
       true
     elsif @secret_word.chars.all? { |char| @correct_guesses.include?(char) }
-      puts "Congratulations, you've won! The word was: #{@secret_word}"
+      puts "Congratulations, you've won! The word was: #{@secret_word}".colorize(:green)
       true
     else
       false
