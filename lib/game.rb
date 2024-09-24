@@ -16,4 +16,8 @@ class Game
   def display_secret_word_dashes
     @secret_word.gsub(/[^A-Z\s]/, '_ ')
   end
+
+  def update_display(guess)
+    @secret_word.chars.map! { |char| char.include?(guess) ? "#{char} " : '_ ' }
+  end
 end
