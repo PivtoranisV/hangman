@@ -18,6 +18,6 @@ class Game
   end
 
   def update_display(guess)
-    @secret_word.chars.map! { |char| char.include?(guess) ? "#{char} " : '_ ' }
+    @secret_word.chars.map! { |char| char.include?(guess) ? "#{char} " : '_ ' }.join
   end
 end

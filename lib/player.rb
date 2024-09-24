@@ -2,7 +2,18 @@
 
 class Player
   def make_guess
-    puts 'Please, make a guess of a letter'
-    gets.chomp.downcase
+    loop do
+      puts "\nPlease make a guess (single letter, a-z):"
+      guess = gets.chomp.downcase
+      return guess if valid_guess?(guess)
+
+      puts "\nInvalid input, please enter a single letter (a-z)."
+    end
+  end
+
+  private
+
+  def valid_guess?(guess)
+    guess.length == 1 && guess.match?(/[a-z]/)
   end
 end
