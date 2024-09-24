@@ -4,4 +4,4 @@ require_relative 'lib/game'
 require_relative 'lib/player'
 require_relative 'lib/dictionary'
 
-Player.new.make_guess
+Game.new.play
