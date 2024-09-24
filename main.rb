@@ -5,5 +5,4 @@ require_relative 'lib/player'
 require_relative 'lib/dictionary'
 
 d = Dictionary.new
-words = d.load_dictionary
-puts words.first
+p d.select_secret_word
