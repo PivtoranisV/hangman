@@ -3,7 +3,7 @@
 class Dictionary
   def select_secret_word
     words = load_dictionary
-    words.select { |word| word.length.between?(5, 12) }.sample
+    words.select { |word| word.length.between?(5, 12) }.sample.downcase
   end
 
   private
