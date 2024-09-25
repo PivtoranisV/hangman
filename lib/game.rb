@@ -18,6 +18,14 @@ class Game
 
   def play
     loop do
+      puts "\nDo you want to (1) make a guess or (2) save the game?".colorize(:yellow)
+      choice = gets.chomp
+
+      if choice == '2'
+        save_game
+        puts 'Game saved!'.colorize(:green)
+        next
+      end
       guess = @player.make_guess
       puts "\n"
       if @correct_guesses.include?(guess)
