@@ -23,8 +23,8 @@ class Game
 
       if choice == '2'
         save_game
-        puts 'Game saved!'.colorize(:green)
-        next
+        puts "\nGame saved!".colorize(:green)
+        break
       end
       guess = @player.make_guess
       puts "\n"
@@ -60,6 +60,12 @@ class Game
       true
     else
       false
+    end
+  end
+
+  def save_game
+    File.open('saved_game', 'w') do |file|
+      Marshal.dump(self, file)
     end
   end
 end
