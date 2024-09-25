@@ -26,10 +26,8 @@ class Game
       end
       guess = @player.make_guess
       puts "\n"
-      if @correct_guesses.include?(guess) || @incorrect_guesses_list.include?(guess)
-        puts "You've already guessed '#{guess}'".colorize(:green)
-        next
-      end
+      next unless valid_guess?(guess)
+
       puts update_display(guess)
       @incorrect_guesses += 1 unless @secret_word.include?(guess)
       break if game_over
@@ -102,5 +100,13 @@ class Game
     File.open('saved_game', 'w') do |file|
       Marshal.dump(self, file)
     end
+  end
+
+  def valid_guess?(guess)
+    if @correct_guesses.include?(guess) || @incorrect_guesses_list.include?(guess)
+      puts "You've already guessed '#{guess}'".colorize(:green)
+      return false
+    end
+    true
   end
 end
