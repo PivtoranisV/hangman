@@ -60,7 +60,8 @@ class Game
 
       game = load_game
       if game
-        puts "\nYour saved game load successfully, continue to play".colorize(:green)
+        puts "\nYour saved game load successfully, continue to play\n".colorize(:green)
+        puts game.update_display(' ')
         game.play
       else
         puts "\nNew game started".colorize(:green)
@@ -72,17 +73,17 @@ class Game
     end
   end
 
-  private
-
-  def display_secret_word_dashes
-    @secret_word.gsub(/[^a-z\s]/, '_ ').colorize(:green)
-  end
-
   def update_display(guess)
     @correct_guesses << guess if @secret_word.include?(guess)
     @incorrect_guesses_list << guess unless @secret_word.include?(guess)
 
     @secret_word.chars.map { |char| @correct_guesses.include?(char) ? "#{char} " : '_ ' }.join
+  end
+
+  private
+
+  def display_secret_word_dashes
+    @secret_word.gsub(/[^a-z\s]/, '_ ').colorize(:green)
   end
 
   def game_over
