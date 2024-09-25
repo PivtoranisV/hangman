@@ -10,6 +10,7 @@ class Game
     @player = Player.new
     @incorrect_guesses = 0
     @correct_guesses = []
+    @incorrect_guesses_list = []
     puts display_secret_word_dashes
   end
 
@@ -25,7 +26,7 @@ class Game
       end
       guess = @player.make_guess
       puts "\n"
-      if @correct_guesses.include?(guess)
+      if @correct_guesses.include?(guess) || @incorrect_guesses_list.include?(guess)
         puts "You've already guessed '#{guess}'".colorize(:green)
         next
       end
@@ -79,6 +80,8 @@ class Game
 
   def update_display(guess)
     @correct_guesses << guess if @secret_word.include?(guess)
+    @incorrect_guesses_list << guess unless @secret_word.include?(guess)
+
     @secret_word.chars.map { |char| @correct_guesses.include?(char) ? "#{char} " : '_ ' }.join
   end
 
