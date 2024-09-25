@@ -19,10 +19,16 @@ class Game
   def play
     loop do
       guess = @player.make_guess
+      puts "\n"
+      if @correct_guesses.include?(guess)
+        puts "You've already guessed '#{guess}'".colorize(:green)
+        next
+      end
       puts update_display(guess)
       @incorrect_guesses += 1 unless @secret_word.include?(guess)
-      puts "\nYou can make only #{6 - @incorrect_guesses} wrong guesses".colorize(:blue)
       break if game_over
+
+      puts "\nYou can make only #{6 - @incorrect_guesses} wrong guesses".colorize(:blue)
     end
   end
 
@@ -39,10 +45,10 @@ class Game
 
   def game_over
     if @incorrect_guesses == 6
-      puts "Game over! The word was: #{@secret_word}".colorize(:red)
+      puts "\nGame over! The word was: #{@secret_word}".colorize(:red)
       true
     elsif @secret_word.chars.all? { |char| @correct_guesses.include?(char) }
-      puts "Congratulations, you've won! The word was: #{@secret_word}".colorize(:green)
+      puts "\nCongratulations, you've won! The word was: #{@secret_word}".colorize(:green)
       true
     else
       false

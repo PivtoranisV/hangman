@@ -5,7 +5,7 @@ require 'colorize'
 class Player
   def make_guess
     loop do
-      puts "\nPlease make a guess (single letter, a-z):".colorize(:yellow)
+      puts "\nPlease make a guess (single letter, a-z):\n".colorize(:yellow)
       guess = gets.chomp.upcase
       return guess if valid_guess?(guess)
 
